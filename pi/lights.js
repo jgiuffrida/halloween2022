@@ -11,7 +11,7 @@ module.exports = {
                 // Write reverse status to pin... gotta figure this one out later
                 // TOOD: Why do i need to reverse the status?
                 console.log('writing to 26');
-                gpio.write(26, true, (err) => {
+                gpio.write(26, false, (err) => {
                     if(err) {
                         console.log(err);
                     }
