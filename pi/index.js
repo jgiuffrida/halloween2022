@@ -1,5 +1,5 @@
-const { exec } = require('child_process');
+const { playLights } = require('./lights');
+const { playSound } = require('./sounds');
 
-exec("curl http://192.168.0.161:3000/sound", (error) => {
-    console.log('error', error);
-});
+playSound();
+playLights();
