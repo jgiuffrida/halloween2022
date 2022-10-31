@@ -3,27 +3,29 @@ const gpio = require('rpi-gpio');
 const PIN = 12;
 
 const writePin = (value, cb) => {
-    gpio.write(PIN, !value, (err) => {
+    gpio.write(PIN, value, (err) => {
         if (err) {
             console.log(`error writing ${(!value).toString()} to ${PIN}`);
+            cb(value);
         } else {
-            cb(!value);
+            cb(value);
         }
     })
 }
 
 const onOffOn = (cb) => {
-    writePin(true, () => {
+    writePin(false, () => {
         setTimeout(() => {
-            writePin(false, () => {
+            writePin(true, () => {
                 setTimeout(() => {
-                    writePin(true, cb);
+                    writePin(false, cb);
                 }, 200)
             })
         }, 250);
     });
 }
 
+// can you tell I wrote this the night before halloween?
 module.exports = {
     playLights: () => {
         console.log('playing lights');
@@ -38,7 +40,7 @@ module.exports = {
                                         onOffOn(() => {
                                             setTimeout(() => {
                                                 writePin(false, () => {
-
+                                                    console.log('finished light sequence')
                                                 });
                                             });
                                         })
@@ -48,7 +50,7 @@ module.exports = {
                         });
                     }, 2000)
                 })
-            }, 4000); // don't start flashing until the stream comes on
+            }, 4500); // don't start flashing until the stream comes on
         });
     }
 }
