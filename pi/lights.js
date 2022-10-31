@@ -39,7 +39,7 @@ module.exports = {
                                     setTimeout(() => {
                                         onOffOn(() => {
                                             setTimeout(() => {
-                                                writePin(false, () => {
+                                                writePin(true, () => {
                                                     console.log('finished light sequence')
                                                 });
                                             });
