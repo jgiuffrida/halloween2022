@@ -3,11 +3,11 @@ const gpio = require('rpi-gpio');
 const PIN = 12;
 
 const writePin = (value, cb) => {
-    gpio.write(PIN, value, (err) => {
+    gpio.write(PIN, !value, (err) => {
         if (err) {
-            console.log(`error writing ${value.toString()} to ${PIN}`);
+            console.log(`error writing ${(!value).toString()} to ${PIN}`);
         } else {
-            cb(value);
+            cb(!value);
         }
     })
 }
@@ -37,7 +37,9 @@ module.exports = {
                                     setTimeout(() => {
                                         onOffOn(() => {
                                             setTimeout(() => {
-                                                writePin(false);
+                                                writePin(false, () => {
+
+                                                });
                                             });
                                         })
                                     }, 6000)
